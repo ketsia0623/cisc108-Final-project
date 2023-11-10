@@ -8,13 +8,7 @@ Our game is a platformer game that is about a t-rex dinosaur jumping on platform
 The lava(red rectangle taking up the bottom of screen) keeps rising up as the t-rex is moving up the platforms.
 There will be obstacles like fire droplets falling down that can reduce the user's score if it touches the 
 t-rex. To win, the user needs to have collected a certain amount of points before the lava completely 
-rises(timer runs out). If the lava touches the t-rex, the user losses. 
-
-collect items like fish and shells to increase the score while
-also avoiding any obstacles that may get in the way. The only way to win the game is to
-make it to the top and have a minimum score.
-lava is rising up, trex is jumping from platforms to platform  to escape the lava. lava is rising up 
-fire droplets, meteors falling, 
+rises(timer runs out). If the lava touches the t-rex, the user losses.
 
 
 Phase 1
