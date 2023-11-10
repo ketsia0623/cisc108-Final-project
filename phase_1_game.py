@@ -8,6 +8,7 @@ JUMP_HEIGHT = 15
 
 @dataclass
 class World:
+    volcano: DesignerObject
     trex: DesignerObject
     trex_speed: int
     is_jumping: bool
@@ -15,12 +16,19 @@ class World:
 
 
 def create_world() -> World:
-    """Create the world"""
-    return World(create_trex(), TREX_SPEED, False, 0)
+    return World(create_volcano(), create_trex(), TREX_SPEED, False, 0)
+
+
+def create_volcano() -> DesignerObject:
+    volcano = emoji("🌋")
+    volcano.y = get_height() * (.59)
+    volcano.flip_x = True
+    volcano.scale_x = 25
+    volcano.scale_y = 20
+    return volcano
 
 
 def create_trex() -> DesignerObject:
-    """ Create the mermaid """
     trex = emoji("🦖")
     trex.y = get_height() * (.93)
     trex.flip_x = True
@@ -37,19 +45,16 @@ def jump_trex(world: World, key: str):
 
 
 def head_left(world: World):
-    """ Make the copter start moving left """
     world.trex_speed = -TREX_SPEED
     world.trex.flip_x = False
 
 
 def head_right(world: World):
-    """ Make the copter start moving right """
     world.trex_speed = TREX_SPEED
     world.trex.flip_x = True
 
 
 def move_trex(world: World):
-    """Move the trex horizontally"""
     world.trex.x += world.trex_speed
     if world.is_jumping:
         world.trex.y -= world.jump_height
@@ -67,10 +72,20 @@ def flip_trex(world: World, key: str):
         head_right(world)
 
 
+def wall_pow(world: World):
+    if world.trex.x > get_width():
+        head_left(world)
+    elif world.trex.x < 0:
+        head_right(world)
+
+
 when('starting', create_world)
 when("updating", move_trex)
 when("typing", flip_trex)
 when("typing", jump_trex)
+when("updating", wall_pow)
 
 start()
+
+
 
