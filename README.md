@@ -16,15 +16,17 @@ Phase 1
 - [x] The t-rex can jump on top of platforms
 - [x] The t-rex is controlled with the keyboard keys: left, right & space
 - [x] There t-rex can bounce off the top and the sides of the screen
+- [x] https://www.youtube.com/watch?v=NBbjEWNKv5U
 
 Phase 2
 - [ ] The screen moves up
+- [ ] There is rising lava
 - [ ] The t-rex dies if it touches the lava
 - [ ] There are fire droplets falling down(reduces user score if t-rex touches it) 
 - [ ] The t-rex dies if it collides with a falling meteor
 
 Phase 3
-- [ ] Make trex moves down with the platformers
+- [ ] Make trex move down with the platformers
 - [ ] The score goes up when objects are collected
 - [ ] The obstacles make the player lose points or game over
 - [ ] The game ends if the t-rex's score isn't high enough
