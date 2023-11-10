@@ -8,14 +8,14 @@ Our game is a platformer game that is about a t-rex dinosaur jumping on platform
 The lava(red rectangle taking up the bottom of screen) keeps rising up as the t-rex is moving up the platforms.
 There will be obstacles like fire droplets falling down that can reduce the user's score if it touches the 
 t-rex. To win, the user needs to have collected a certain amount of points before the lava completely 
-rises(timer runs out). If the lava touches the t-rex, the user losses.
+rises(timer runs out). If the lava touches the t-rex, the user loses.
 
 
 Phase 1
-- [ ] There is a bouncing t-rex, rising lava, and volcano background
-- [ ] The t-rex can jump on top of platforms
-- [ ] The t-rex is controlled with the keyboard keys: up, down, left, right & space
-- [ ] There is top where the user can reach. 
+- [x] There is a bouncing t-rex, and a volcano background
+- [x] The t-rex can jump on top of platforms
+- [x] The t-rex is controlled with the keyboard keys: left, right & space
+- [x] There t-rex can bounce off the top and the sides of the screen
 
 Phase 2
 - [ ] The screen moves up
