@@ -21,16 +21,13 @@ class World:
     jump_height: int
     platforms: list[DesignerObject]
     meteors: list[Meteor]
-    game_over: bool
     words: DesignerObject
-    frame_count: int
 
 
 def create_world() -> World:
     return World(create_volcano(), create_trex(),
                  TREX_SPEED, False, 0, create_platforms(),
-                 create_meteors(), False,
-                 text("black", "", 100, get_width() // 2), 60)
+                 [], text("black", "", 100, get_width() // 2))
 
 
 def create_volcano() -> DesignerObject:
@@ -49,29 +46,17 @@ def create_trex() -> DesignerObject:
     trex.scale_y = 2
     return trex
 
+def create_meteor(world:World) -> Meteor:
+    meteor = emoji("comet")
+    meteor.x = randint(0, get_width() - meteor.width)
+    meteor.y = -10
+    falling_speed = randint(5, 15)
+    new_meteor = Meteor(meteor, falling_speed)
+    world.meteors.append(new_meteor)
 
-def create_meteors() -> list[Meteor]:
-    meteors = []
-    count = 10
-    while count > 0:
-        meteorite = emoji("comet")
-        meteorite.x = randint(0, get_width() - meteorite.width)
-        meteorite.y = -1
-        if count % 2 == 0:
-            falling_speed = randint(5, 15)
-        else:
-            falling_speed = randint(10, 20)
-        meteor = Meteor(meteorite, falling_speed)
-        meteors.append(meteor)
-        count -= 1
-
-    return meteors
 
 
 def falling_meteors(world: World):
-    if world.frame_count % 60 == 0:
-        if world.meteors:
-            world.meteors[0].y = -10
     for meteor in world.meteors:
         meteor.meteorite.y += meteor.falling_speed
         if meteor.meteorite.y > get_height():
@@ -99,9 +84,8 @@ def check_meteor_collision(world: World):
                 and world.trex.y < meteor.meteorite.y + meteor.meteorite.height
                 and world.trex.y + world.trex.height > meteor.meteorite.y
         ):
-            world.game_over = True
-            world.trex.scale_x = 5
-            world.trex.scale_y = .5
+            world.trex.scale_y -= .05
+            world.trex.scale_x += .05
 
 
 def check_platform_collision(world: World):
@@ -117,12 +101,16 @@ def check_platform_collision(world: World):
             return True
     return False
 
+def meteor_on_key(world:World):
+    if randint(1,10)%2 == 0:
+        create_meteor(world)
 
 def jump_trex(world: World, key: str):
-    """Make the trex jump"""
     if key == "space" and not world.is_jumping:
         world.is_jumping = True
         world.jump_height = JUMP_HEIGHT
+        meteor_on_key(world)
+
 
 
 def head_left(world: World):
@@ -150,8 +138,10 @@ def move_trex(world: World):
 def flip_trex(world: World, key: str):
     if key == "left":
         head_left(world)
+        meteor_on_key(world)
     elif key == "right":
         head_right(world)
+        meteor_on_key(world)
 
 
 def wall_pow(world: World):
@@ -164,15 +154,8 @@ def wall_pow(world: World):
         world.is_jumping = False
 
 
-def GAME_OVER(world: World):
-    if world.game_over:
-        world.words.text = "GAME OVER! :P"
-        world.trex_speed = 0
-        world.jump_height = 0
 
 
-def increase_count(world: World):
-    world.frame_count += 1
 
 
 when('starting', create_world)
@@ -182,7 +165,6 @@ when("typing", jump_trex)
 when("updating", wall_pow)
 when("updating", check_meteor_collision)
 when("updating", falling_meteors)
-when("updating", GAME_OVER)
-when("updating", increase_count)
+
 
 start()
