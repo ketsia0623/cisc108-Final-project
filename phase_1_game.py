@@ -22,12 +22,14 @@ class World:
     platforms: list[DesignerObject]
     meteors: list[Meteor]
     words: DesignerObject
+    score: int
+    game_over: bool
 
 
 def create_world() -> World:
     return World(create_volcano(), create_trex(),
                  TREX_SPEED, False, 0, create_platforms(),
-                 [], text("black", "", 100, get_width() // 2))
+                 [], text("black", "", 25, get_width() // 6, 8), score=0, game_over=False)
 
 
 def create_volcano() -> DesignerObject:
@@ -46,7 +48,7 @@ def create_trex() -> DesignerObject:
     trex.scale_y = 2
     return trex
 
-def create_meteor(world:World) -> Meteor:
+def create_meteor(world:World):
     meteor = emoji("comet")
     meteor.x = randint(0, get_width() - meteor.width)
     meteor.y = -10
@@ -86,6 +88,7 @@ def check_meteor_collision(world: World):
         ):
             world.trex.scale_y -= .05
             world.trex.scale_x += .05
+            world.score -= 1
 
 
 def check_platform_collision(world: World):
@@ -153,9 +156,18 @@ def wall_pow(world: World):
         world.trex.y = 0
         world.is_jumping = False
 
+def game_end(world:World):
+    if world.score <= -30:
+        world.game_over = True
 
-
-
+def display_score(world: World):
+    if not world.game_over:
+        # Update the score display
+        world.words.text = f"Score: {world.score}"
+    else:
+        # Display game over message
+        world.trex_speed = 0
+        world.words.text = "GAME OVER! :P"
 
 
 when('starting', create_world)
@@ -165,6 +177,10 @@ when("typing", jump_trex)
 when("updating", wall_pow)
 when("updating", check_meteor_collision)
 when("updating", falling_meteors)
-
+when("updating", display_score)
+when("updating", game_end)
 
 start()
+
+
+
