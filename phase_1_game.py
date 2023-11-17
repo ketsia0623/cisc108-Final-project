@@ -57,7 +57,6 @@ def create_meteor(world:World):
     world.meteors.append(new_meteor)
 
 
-
 def falling_meteors(world: World):
     for meteor in world.meteors:
         meteor.meteorite.y += meteor.falling_speed
