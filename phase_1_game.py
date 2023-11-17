@@ -76,6 +76,7 @@ def create_platforms() -> list[DesignerObject]:
     return platforms
 
 
+
 def check_meteor_collision(world: World):
     for meteor in world.meteors:
         if (
