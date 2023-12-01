@@ -1,17 +1,37 @@
 # cisc108-Final-project
 
+T-rex Bounce
+
+With a goal of 30points, the t-rex avoids it's biggest fear, the meteor. 
+
 
 Ketsia Lumiere Donfack Ouwe, ketsiad@udel.edu
 Meera Nambiar, mnambiar@udel.edu
 
-Pitch and Description
-Our game is a platformer game that is about a t-rex dinosaur jumping on platforms in order to avoid lava.
-The lava(red rectangle taking up the bottom of screen) keeps rising up as the t-rex is moving up the platforms.
-There will be obstacles like fire droplets falling down that can reduce the user's score if it touches the 
-t-rex. To win, the user needs to have collected a certain amount of points before the lava completely 
-rises(timer runs out). If the lava touches the t-rex, the user loses.
+About Section of our Game
+Our game is a platformer game about a t-rex dinosaur jumping on platforms in order to avoid lava, as well 
+as collect food. The goal of the game is for the user to reach a score of 30 by collecting food items in 
+order to win. However, the user will lose if they get a score of -30 instead. While playing, if they are 
+able to catch a smaller dinosaur, they automatically win the game. There will be obstacles like fire droplets 
+falling down that can reduce the user's score if the t-rex touches it. Additionally, t-rex enlarges itself when 
+the game is over and the user tries to keep playing.
 
+Preview of Our Game
+yt link
 
+Instructions
+When our game is first launched, a moving dinosaur t-rex appears. When playing, the left & right keys, 
+and the spacebar are used. The spacebar is used to jump and the left and right keys are used to turn left and right.
+When the spacebar is double-tapped, it allows the t-rex to jump twice as high. No other keyboard keys are needed to play.   
+
+Authors: 
+- Ketsia Lumiere Donfack Ouwe, ketsiad@udel.edu
+- Meera Nambiar, mnambiar@udel.edu
+
+Acknowledgements
+- Designer Tutorial
+
+TASK LIST:
 Phase 1
 - [x] There is a bouncing t-rex, and a volcano background
 - [x] The t-rex can jump on top of platforms
@@ -28,9 +48,8 @@ Phase 2
 - [x] https://youtu.be/fdbF7J18RWY
 
 Phase 3
-- [ ] There is rising lava
-- [ ] Make trex move down with the platformers
+- [ ] T-rex can collect another smaller dinosaur to immediately win
 - [ ] The score goes up when objects are collected
-- [ ] The obstacles make the player lose points or game over
-- [ ] The game ends if the t-rex's score isn't high enough
-- [ ] The player can customize the character (mermaid, t-rex, snake, fish)
+- [ ] the trex loses when it reaches a score of -30 and flattens 
+- [ ] There is meat falling that the trex can collect to increase its score
+- [ ] The t-rex slowly enlarges when the game is over
