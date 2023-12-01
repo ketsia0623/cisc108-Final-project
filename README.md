@@ -2,7 +2,7 @@
 
 T-rex Bounce
 
-With a goal of 30points, the t-rex avoids it's biggest fear, the meteor. 
+With a goal of 30points, the t-rex avoids it's biggest fear, the meteor.   
 
 
 Ketsia Lumiere Donfack Ouwe, ketsiad@udel.edu
