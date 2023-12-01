@@ -18,6 +18,12 @@ class Meat:
     falling_speed: int
     eaten: bool
 
+@dataclass
+class Dino:
+    body: DesignerObject
+    falling_speed: int
+    eaten: bool
+
 
 @dataclass
 class World:
@@ -32,13 +38,14 @@ class World:
     score: int
     game_over: bool
     meats: list[Meat]
+    dinos: list[Dino]
 
 
 def create_world() -> World:
     return World(create_volcano(), create_trex(),
                  TREX_SPEED, False, 0, create_platforms(),
                  [], text("black", "", 25, get_width() // 6, 8), score=0, game_over=False,
-                 meats=[])
+                 meats=[], dinos=[])
 
 
 def create_volcano() -> DesignerObject:
@@ -75,6 +82,13 @@ def create_meat(world: World):
     new_meat = Meat(meat, falling_speed, False)
     world.meats.append(new_meat)
 
+def create_dino(world: World):
+    dino = emoji("🦕")
+    dino.x = randint(0, get_width() - dino.width)
+    dino.y = -10
+    falling_speed = randint(15, 20)
+    new_dino = Dino(dino, falling_speed, False)
+    world.dinos.append(new_dino)
 
 def falling_meteors(world: World):
     kept_meteors = []
@@ -99,6 +113,18 @@ def falling_meats(world: World):
             kept_meat.append(meat)
     world.meats = kept_meat
 
+def falling_dinos(world: World):
+    kept_dinos= []
+    for dino in world.dinos:
+        dino.body.y += dino.falling_speed
+        if colliding(dino.body, world.trex):
+            world.trex.scale_y = 50
+            world.trex.scale_x = 50
+            world.score += 100
+            destroy(dino.body)
+        else:
+            kept_dinos.append(dino)
+    world.dinos = kept_dinos
 
 def create_platforms() -> list[DesignerObject]:
     platforms = []
@@ -145,6 +171,9 @@ def meat_on_key(world: World):
     if randint(1, 10) % 2 == 0:
         create_meat(world)
 
+def dino_on_key(world: World):
+    if randint(1, 20) % 15 == 0:
+        create_dino(world)
 
 def jump_trex(world: World, key: str):
     if key == "space" and not world.is_jumping:
@@ -152,6 +181,7 @@ def jump_trex(world: World, key: str):
         world.jump_height = JUMP_HEIGHT
         meteor_on_key(world)
         meat_on_key(world)
+        dino_on_key(world)
 
 
 def head_left(world: World):
@@ -181,10 +211,12 @@ def flip_trex(world: World, key: str):
         head_left(world)
         meteor_on_key(world)
         meat_on_key(world)
+        dino_on_key(world)
     elif key == "right":
         head_right(world)
         meteor_on_key(world)
         meat_on_key(world)
+        dino_on_key(world)
 
 
 def wall_pow(world: World):
@@ -203,19 +235,30 @@ def wall_pow(world: World):
 
 
 def game_end(world: World):
-    if world.score <= -30:
+    if world.score <= -30 or world.score >= 30:
         world.game_over = True
 
 
 def display_score(world: World):
     if not world.game_over:
-        # Update the score display
         world.words.text = f"Score: {world.score}"
-    else:
-        # Display game over message
+    elif world.game_over and world.score >= 30:
+        world.trex_speed = 0
+        world.words.text = "YOU WIN!"
+        world.words.color = "red"
+        world.words.text_size = 100
+        world.words.y = get_height() // 2
+        world.words.x = get_width() // 2
+    elif world.game_over and world.score <= -30:
         world.trex_speed = 0
         world.words.text = "GAME OVER! :P"
+        world.words.color = "red"
+        world.words.text_size = 100
+        world.words.y = get_height()//2
+        world.words.x = get_width()//2
 
+def game_is_done(world:World)->bool:
+    return world.game_over
 
 when('starting', create_world)
 when("updating", move_trex)
@@ -225,8 +268,10 @@ when("updating", wall_pow)
 when("updating", check_meteor_collision)
 when("updating", falling_meteors)
 when("updating", falling_meats)
+when("updating", falling_dinos)
 when("updating", display_score)
 when("updating", game_end)
+when(game_is_done, display_score, pause)
 
 start()
 
