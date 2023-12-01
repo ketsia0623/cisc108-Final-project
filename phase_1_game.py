@@ -167,6 +167,7 @@ def meteor_on_key(world: World):
             count -= 1
 
 
+
 def meat_on_key(world: World):
     if randint(1, 10) % 2 == 0:
         create_meat(world)
