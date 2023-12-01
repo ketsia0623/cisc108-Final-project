@@ -2,8 +2,7 @@
 
 T-rex Bounce
 
-With a goal of 30points, the t-rex avoids it's biggest fear, the meteor.   
-
+With a goal of 30points, the t-rex avoids it's biggest fear, the meteor.
 
 Ketsia Lumiere Donfack Ouwe, ketsiad@udel.edu
 Meera Nambiar, mnambiar@udel.edu
@@ -17,7 +16,8 @@ falling down that can reduce the user's score if the t-rex touches it. Additiona
 the game is over and the user tries to keep playing.
 
 Preview of Our Game
-yt link
+https://youtu.be/fVX0URDuQHw
+https://youtu.be/LpzgbRpVseA
 
 Instructions
 When our game is first launched, a moving dinosaur t-rex appears. When playing, the left & right keys, 
@@ -48,8 +48,8 @@ Phase 2
 - [x] https://youtu.be/fdbF7J18RWY
 
 Phase 3
-- [ ] T-rex can collect another smaller dinosaur to immediately win
-- [ ] The score goes up when objects are collected
-- [ ] the trex loses when it reaches a score of -30 and flattens 
-- [ ] There is meat falling that the trex can collect to increase its score
-- [ ] The t-rex slowly enlarges when the game is over
+- [x] T-rex can collect another smaller dinosaur to immediately win
+- [x] The score goes up when objects are collected
+- [x] the trex loses when it reaches a score of -30 and flattens 
+- [x] There is meat falling that the trex can collect to increase its score
+- [x] The t-rex slowly enlarges when the game is over
